@@ -45,7 +45,7 @@ module.exports = Mn.View.extend({
                 App.Api.Users.loginAs(this.model.get('id'))
                     .then(res => {
                         Tokens.addToken(res.token, res.user.nickname || res.user.name);
-                        window.location = (window.BASE_PATH || '') + '/';
+                        window.location = window.getBasePath() + '/';
                         window.location.reload();
                     })
                     .catch(err => {

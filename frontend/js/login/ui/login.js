@@ -24,7 +24,7 @@ module.exports = Mn.View.extend({
 
             Api.Tokens.login(this.ui.identity.val(), this.ui.secret.val(), true)
                 .then(() => {
-                    window.location = (window.BASE_PATH || '') + '/';
+                    window.location = window.getBasePath() + '/';
                 })
                 .catch(err => {
                     this.ui.error.text(err.message).show();
