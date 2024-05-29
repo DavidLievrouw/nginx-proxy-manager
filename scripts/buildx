@@ -38,4 +38,4 @@ docker buildx build \
 rc=$?
 docker buildx rm "${BUILDX_NAME:-npm}"
 echo -e "${BLUE}❯ ${GREEN}Multiarch build Complete${RESET}"
-#exit $rc
+exit $rc
