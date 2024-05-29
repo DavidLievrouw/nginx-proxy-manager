@@ -11,7 +11,8 @@ if [ ! -d '/data' ]; then
 fi
 # Ensure /etc/letsencrypt is mounted
 if [ ! -d '/etc/letsencrypt' ]; then
-	log_fatal '/etc/letsencrypt is not mounted! Check your docker configuration.'
+	log_info '/etc/letsencrypt is not mounted! Check your docker configuration. Creating a directory locally.'
+	mkdir -p /etc/letsencrypt
 fi
 
 # Create required folders
