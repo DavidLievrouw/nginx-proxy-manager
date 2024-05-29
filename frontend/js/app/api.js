@@ -37,7 +37,7 @@ function fetch(verb, path, data, options) {
     options = options || {};
 
     return new Promise(function (resolve, reject) {
-        let api_url = '/api/';
+        let api_url = (window.BASE_PATH || '') + '/api/';
         let url     = api_url + path;
         let token   = Tokens.getTopToken();
 
@@ -131,7 +131,7 @@ function FileUpload(path, fd) {
         let xhr   = new XMLHttpRequest();
         let token = Tokens.getTopToken();
 
-        xhr.open('POST', '/api/' + path);
+        xhr.open('POST', (window.BASE_PATH || '') + '/api/' + path);
         xhr.overrideMimeType('text/plain');
         xhr.setRequestHeader('Authorization', 'Bearer ' + (token ? token.t : null));
         xhr.send(fd);
@@ -155,7 +155,7 @@ function FileUpload(path, fd) {
 //ref : https://codepen.io/chrisdpratt/pen/RKxJNo
 function DownloadFile(verb, path, filename) {
     return new Promise(function (resolve, reject) {
-        let api_url = '/api/';
+        let api_url = (window.BASE_PATH || '') + '/api/';
         let url = api_url + path;
         let token = Tokens.getTopToken();
 

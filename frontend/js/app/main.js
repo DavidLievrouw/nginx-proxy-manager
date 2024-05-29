@@ -45,7 +45,8 @@ const App = Mn.Application.extend({
                 this.UI = new UI();
                 this.UI.on('render', () => {
                     new Router(options);
-                    Backbone.history.start({pushState: true});
+                    const basePath = window.BASE_PATH || '';
+                    Backbone.history.start({pushState: true, root: basePath});
 
                     // Ask the admin use to change their details
                     if (Cache.User.get('email') === 'admin@example.com') {

@@ -50,6 +50,11 @@ COPY docker/rootfs /
 RUN rm -rf /etc/s6-overlay/s6-rc.d/user/contents.d/frontend /etc/nginx/conf.d/dev.conf \
 	&& chmod 644 /etc/logrotate.d/nginx-proxy-manager
 
+# Create a shell script that writes the BASE_PATH environment variable to a file
+RUN mkdir -p /etc/cont-init.d
+RUN printf '#!/command/with-contenv sh\n\necho "window.BASE_PATH = \\"$BASE_PATH\\";" > /app/frontend/js/base-path.js && cat /app/frontend/js/base-path.js' > /etc/cont-init.d/base-path-init.sh
+RUN chmod +x /etc/cont-init.d/base-path-init.sh
+
 VOLUME [ "/data" ]
 ENTRYPOINT [ "/init" ]
 

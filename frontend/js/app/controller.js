@@ -19,7 +19,7 @@ module.exports = {
      * Login
      */
     showLogin: function () {
-        window.location = '/login';
+        window.location = (window.BASE_PATH || '') + '/login';
     },
 
     /**
