@@ -3,6 +3,7 @@ const Mn       = require('backbone.marionette');
 const template = require('./login.ejs');
 const Api      = require('../../app/api');
 const i18n     = require('../../app/i18n');
+const Cache      = require('../../app/cache');
 
 module.exports = Mn.View.extend({
     template:  template,
@@ -24,7 +25,7 @@ module.exports = Mn.View.extend({
 
             Api.Tokens.login(this.ui.identity.val(), this.ui.secret.val(), true)
                 .then(() => {
-                    window.location = window.getBasePath() + '/';
+                    window.location = Cache.basePath + '/';
                 })
                 .catch(err => {
                     this.ui.error.text(err.message).show();

@@ -34,6 +34,7 @@ const App = Mn.Application.extend({
         Api.status()
             .then(result => {
                 Cache.version = [result.version.major, result.version.minor, result.version.revision].join('.');
+                Cache.basePath = result.basePath;
             })
             .then(Api.Tokens.refresh)
             .then(this.bootstrap)
@@ -45,7 +46,7 @@ const App = Mn.Application.extend({
                 this.UI = new UI();
                 this.UI.on('render', () => {
                     new Router(options);
-                    Backbone.history.start({pushState: true, root: window.getBasePath()});
+                    Backbone.history.start({pushState: true, root: Cache.basePath});
 
                     // Ask the admin use to change their details
                     if (Cache.User.get('email') === 'admin@example.com') {

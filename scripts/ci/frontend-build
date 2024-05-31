@@ -11,8 +11,8 @@ if hash docker 2>/dev/null; then
 	cd "${DIR}/../.."
 	echo -e "${BLUE}❯ ${CYAN}Building Frontend ...${RESET}"
 	
-  # Read the version number from the version.txt file
-  VERSION=$(cat .version)
+	# Read the version number from the .version file
+	VERSION=$(cat .version)
  
 	docker run -it --rm \
 		-e CI=true \
