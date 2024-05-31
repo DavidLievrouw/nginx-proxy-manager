@@ -8,6 +8,7 @@ const Api        = require('./api');
 const Tokens     = require('./tokens');
 const UI         = require('./ui/main');
 const i18n       = require('./i18n');
+const getBasePath = require("../basePath");
 
 const App = Mn.Application.extend({
 
@@ -16,6 +17,9 @@ const App = Mn.Application.extend({
     UI:         null,
     i18n:       i18n,
     Controller: Controller,
+    getBasePath: function () {
+        return getBasePath();
+    },
 
     region: {
         el:             '#app',
@@ -34,7 +38,6 @@ const App = Mn.Application.extend({
         Api.status()
             .then(result => {
                 Cache.version = [result.version.major, result.version.minor, result.version.revision].join('.');
-                Cache.basePath = result.basePath;
             })
             .then(Api.Tokens.refresh)
             .then(this.bootstrap)
@@ -46,7 +49,7 @@ const App = Mn.Application.extend({
                 this.UI = new UI();
                 this.UI.on('render', () => {
                     new Router(options);
-                    Backbone.history.start({pushState: true, root: Cache.basePath});
+                    Backbone.history.start({pushState: true, root: getBasePath()});
 
                     // Ask the admin use to change their details
                     if (Cache.User.get('email') === 'admin@example.com') {

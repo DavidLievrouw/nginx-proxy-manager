@@ -14,7 +14,6 @@ let router = express.Router({
  */
 router.get('/', (req, res/*, next*/) => {
 	let version = pjson.version.split('-').shift().split('.');
-	let basePath = process.env.BASE_PATH || '';
 
 	res.status(200).send({
 		status:  'OK',
@@ -22,8 +21,7 @@ router.get('/', (req, res/*, next*/) => {
 			major:    parseInt(version.shift(), 10),
 			minor:    parseInt(version.shift(), 10),
 			revision: parseInt(version.shift(), 10)
-		},
-		basePath: basePath
+		}
 	});
 });
 

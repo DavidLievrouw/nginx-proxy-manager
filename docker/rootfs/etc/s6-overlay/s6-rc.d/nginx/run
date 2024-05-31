@@ -6,4 +6,10 @@ set -e
 . /usr/bin/common.sh
 
 log_info 'Starting nginx ...'
+if [ -f "/etc/nginx/conf.d/dev.conf" ]; then
+    sed -i "s|\${BASE_PATH}|${BASE_PATH}|g" /etc/nginx/conf.d/dev.conf
+fi
+if [ -f "/etc/nginx/conf.d/production.conf" ]; then
+    sed -i "s|\${BASE_PATH}|${BASE_PATH}|g" /etc/nginx/conf.d/production.conf
+fi
 exec s6-setuidgid "$PUID:$PGID" nginx

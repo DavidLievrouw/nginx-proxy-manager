@@ -3,8 +3,7 @@ const UserModel = require('../models/user');
 let cache = {
     User:    new UserModel.Model(),
     locale:  'en',
-    version: null,
-    basePath: ''
+    version: null
 };
 
 module.exports = cache;

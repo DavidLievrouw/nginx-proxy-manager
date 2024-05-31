@@ -1,6 +1,7 @@
 const Backbone = require('backbone');
 const Cache    = require('./cache');
 const Tokens   = require('./tokens');
+const getBasePath = require("../basePath");
 
 module.exports = {
 
@@ -19,7 +20,7 @@ module.exports = {
      * Login
      */
     showLogin: function () {
-        window.location = Cache.basePath + '/login';
+        window.location = getBasePath() + '/login';
     },
 
     /**

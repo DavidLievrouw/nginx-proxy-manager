@@ -5,5 +5,16 @@
 	<span class="loader"></span>
 </div>
 
-<script type="text/javascript" src="/js/main.bundle.js?v=<%= version %>"></script>
+<script>
+	window.BASE_PATH = 'BASE_PATH_PLACEHOLDER';
+	if (window.BASE_PATH.endsWith('/')) {
+		window.BASE_PATH = window.BASE_PATH.slice(0, -1);
+	}
+</script>
+<script>
+	const script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = window.BASE_PATH + '/js/main.bundle.js?v=<%= version %>';
+	document.body.appendChild(script);
+</script>
 <%- include partials/footer.ejs %>
