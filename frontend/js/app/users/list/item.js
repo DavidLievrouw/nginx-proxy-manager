@@ -2,7 +2,6 @@ const Mn       = require('backbone.marionette');
 const App      = require('../../main');
 const Tokens   = require('../../tokens');
 const template = require('./item.ejs');
-const {getBasePath} = require("../../../login/ui/login");
 
 module.exports = Mn.View.extend({
     template: template,
@@ -46,7 +45,7 @@ module.exports = Mn.View.extend({
                 App.Api.Users.loginAs(this.model.get('id'))
                     .then(res => {
                         Tokens.addToken(res.token, res.user.nickname || res.user.name);
-                        window.location = getBasePath() + '/';
+                        window.location = '/';
                         window.location.reload();
                     })
                     .catch(err => {
