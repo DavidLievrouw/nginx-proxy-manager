@@ -1,3 +1,40 @@
+# Fork goal
+
+This is originally a fork of the [nginx-proxy-manager](https://github.com/NginxProxyManager/nginx-proxy-manager) repository, to which a couple of features were added:
+
+## Setting the initial admin credentials through environment variables
+
+By setting a couple of environment variables, you can override the default behavior when initializing an instance of _nginx-proxy-manager_, when the initial admin account is created. By default, the initial administrator account is _admin@example.com_, and its password is _changeme_.
+
+You can now override these values, by setting the `INITIAL_ADMIN_EMAIL` and `INITIAL_ADMIN_PASSWORD` environment variables.
+
+```yml
+    environment:
+      - INITIAL_ADMIN_EMAIL=david.lievrouw@dalion.be
+      - INITIAL_ADMIN_PASSWORD=P@ssw0rd
+```
+
+## Allow the admin UI to be served under a sub-path
+
+For security and uniformity reasons, I wanted to serve the admin UI interface behind a reverse proxy. I should be able to navigate to it, when it is hosted under a path, e.g. from https://host.com:9443/npm. The provided _frontend_ application does not allow for that, because it uses fixed rooted paths on several locations.
+
+I have added some custom nginx configuration, so that we can host the admin UI under a path. You can configure it by providing the `BASE_PATH` environment variable, when starting the container:
+
+```yml
+    environment:
+      - BASE_PATH=/npm
+```
+
+## Build script adjustments
+
+To be able to more easily build and push this image to our private container registry, the build and CI scripts were slightly modified. These do not represent any functional changes.
+
+---
+
+Below is the original readme
+
+--- 
+
 <p align="center">
 	<img src="https://nginxproxymanager.com/github.png">
 	<br><br>
