@@ -6,4 +6,7 @@ set -e
 . /usr/bin/common.sh
 
 log_info 'Starting nginx ...'
+if [ -f "/etc/nginx/conf.d/map.conf" ]; then
+  sed -i "s|\${BASE_PATH}|${BASE_PATH}|g" /etc/nginx/conf.d/map.conf
+fi
 exec s6-setuidgid "$PUID:$PGID" nginx
