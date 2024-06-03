@@ -31,7 +31,7 @@ docker buildx build \
 	--pull \
 	--load \
 	-f docker/Dockerfile \
-	-t nginx-proxy-manager:${VERSION}-workflow \
+	-t nginx-proxy-manager:${VERSION} \
 	$@ \
 	.
 
