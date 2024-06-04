@@ -29,6 +29,23 @@ I have added some custom nginx configuration, so that we can host the admin UI u
 
 To be able to more easily build and push this image to our private container registry, the build and CI scripts were slightly modified. These do not represent any functional changes.
 
+## How to build and publish
+
+Build:
+- `git config --global core.autocrlf input`
+- `git config core.symlinks true`
+- `git reset --hard HEAD`
+- Open wsl terminal:
+	- navigate to /mnt/c/git/nginx-proxy-manager
+	- run `docker logout`
+	- run `. scripts/ci/frontend-build`
+	- run `. scripts/buildx`
+
+Publish:
+- Open PowerShell
+- Run `./scripts/push-to-acr.ps1`
+- Run `./scripts/purge-untagged-images.ps1`
+
 ---
 
 Below is the original readme
